@@ -1,0 +1,68 @@
+<?php
+echo "Lab 5/v1<br>";
+echo "1.<br>";
+$n = 2;
+$m = 3;
+$o = [];
+for ($i = 0; $i < $n; $i++) for ($j = 0; $j < $m; $j++) $o[$i][$j] = rand(-10, 10);
+
+foreach ($o as $i) foreach ($i as $j) echo "$j _ ";
+echo "<br><br>a. ";
+
+foreach ($o as $i) {
+    foreach ($i as $j) if ($j < 10) if ($j % 2 == 0) echo "$j _ ";
+}
+echo "<br>b. ";
+
+foreach ($o as $i) {
+    foreach ($i as $j) {
+        $h = 0;
+        $aux = $j;
+        while ($aux != 0) {
+            $h++;
+            $aux = (int)($aux / 10);
+        }
+        if ($h == 1) echo "$j _ ";
+    }
+}
+echo "<br>c. ";
+
+$max = 0;
+foreach ($o as $i) foreach ($i as $j) if ($j > $max)  $max = $j;
+
+$max *= 2;
+foreach ($o as $i) {
+    foreach ($i as $j) {
+        if ($j % 2 == 0) $j = $max;
+        echo "$j _ ";
+    }
+}
+echo "<br>d. ";
+
+foreach ($o as $y => $i) {
+    foreach ($i as $x => $j) {
+        if ($y == 0) echo "$j _ ";
+        if ($x == 1) echo "$j _ ";
+    }
+}
+echo "<br>e. ";
+
+foreach ($o as $y => $i) {
+    foreach ($i as $x => $j) {
+        if ($y == 1) echo "$j _ ";
+        if ($x == 0) echo "$j _ ";
+    }
+}
+echo "<br><br>";
+
+
+echo "4.<br>";
+foreach ($o as $i) foreach ($i as $j) echo "$j _ ";
+echo "<br><br>a. ";
+
+foreach ($o as $y => $i) {
+    foreach ($i as $x => $j) if ($y == $x) {
+        $j += 5;
+        echo "$j _ ";
+    }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Laborator 4</title>
+  </head>
+  <body>
+    <script>
+      function Random(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+
+      function numere(n) {
+        var numere = [];
+        while (n != 0) {
+          numere.push(n % 10);
+          n = parseInt(n / 10);
+        }
+
+        return numere.reverse();
+      }
+
+      function afisareArray(array) {
+        array.forEach(function (v) {
+          console.log(v);
+        });
+      }
+
+      function prob_1() {
+        var n = Random(4, 10);
+        var x = Random(0, 50);
+        var y = Random(0, 50);
+        var array = [];
+
+        for (let i = 0; i < n; i++) array.push(Random(-230, 200));
+
+        console.log("Problema_1");
+        console.log("a:", `${array.join("     ")}`);
+
+        console.log("b:");
+        afisareArray(array.reverse());
+
+        console.log("c:");
+        afisareArray(
+          array.filter(function (v) {
+            return v % 2 === 0;
+          })
+        );
+
+        console.log("d:");
+        afisareArray(
+          array.filter(function (v) {
+            return v % 2 !== 0;
+          })
+        );
+
+        console.log("e:");
+        afisareArray(
+          array.filter(function (v) {
+            return v > x && v & (y === 0);
+          })
+        );
+
+        console.log("f:");
+        afisareArray(
+          array.filter(function (v) {
+            return v > x && v < y;
+          })
+        );
+
+        var p1g = [];
+        array.forEach(function (v, k) {
+          if (v < 0 || v % 2 !== 0) p1g.push(k);
+        });
+        console.log("g:");
+        afisareArray(p1g);
+
+        console.log(
+          "h:",
+          array
+            .filter(function (v) {
+              return v % 2 === 0;
+            })
+            .reduce(function (a, b) {
+              return a + b;
+            }, 0) / array.length
+        );
+
+        var p1i = [];
+        array.forEach(function (v, k) {
+          if (numere(v).length === 2) p1i.push(k);
+        });
+        console.log("i:");
+        afisareArray(p1i);
+
+        console.log(
+          "j:",
+          array
+            .filter(function (v) {
+              return v % 3 === 0;
+            })
+            .reduce(function (a, b) {
+              return a + b;
+            }, 0)
+        );
+
+        console.log("k:");
+        afisareArray(
+          [...array]
+            .sort(function (a, b) {
+              return b - a;
+            })
+            .splice(0, 2)
+        );
+
+        console.log("l:");
+        afisareArray(
+          [...array]
+            .sort(function (a, b) {
+              return b - a;
+            })
+            .splice(1, [...array].length - 2)
+        );
+      }
+
+      function prob_4() {
+        var n = Random(0, 10);
+        var array = [];
+
+        for (let i = 0; i < n; i++) array.push(Random(-230, 200));
+
+        console.log("Problema_4:");
+        console.log("Tablou:");
+        afisareArray(array);
+
+        console.log("al 3-lea element -> minimal:");
+        var minimal_key = array.indexOf(Math.min(...array));
+
+        var aux = array[minimal_key];
+        array[minimal_key] = array[2];
+        array[2] = aux;
+
+        afisareArray(array);
+      }
+
+      function prob_7() {
+        var n = Random(0, 10);
+        var array = [];
+
+        for (let i = 0; i < n; i++) array.push(Random(-230, 200));
+
+        console.log("Problema_4:");
+        console.log("Tablou:");
+        afisareArray(array);
+
+        console.log("Toate elementele - 12:");
+        afisareArray(
+          array.map(function (v) {
+            return v - 12;
+          })
+        );
+      }
+
+      prob_1();
+      console.log("==========================================");
+      prob_4();
+      console.log("==========================================");
+      prob_7();
+    </script>
+  </body>
+</html>

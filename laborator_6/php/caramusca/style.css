@@ -1,0 +1,42 @@
+.header,
+footer {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  background-color: #808080;
+  color: white;
+}
+
+.header ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.header ul li {
+  padding: 0.5em 1.5em;
+  border-right: 1px solid white;
+  background-color: #bdbec4;
+}
+
+.header ul li a {
+  text-decoration: none;
+}
+
+.content {
+  padding: 1em;
+  display: flex;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 0.7em 1em;
+  background-color: #808080;
+  color: white;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+}

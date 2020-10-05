@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "question": "What is the wonder?",
+    "type": "radio",
+    "options": [
+      {
+        "id": 1,
+        "title": "The Great Barrier Reef"
+      },
+      {
+        "id": 2,
+        "title": "The Niagra Falls"
+      },
+      {
+        "id": 3,
+        "title": "The Grand Canyon"
+      },
+      {
+        "id": 4,
+        "title": "Death Valley"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Death Valley is hotter than Mount Everest",
+    "type": "checkbox",
+    "options": [
+      {
+        "id": 1,
+        "title": "TRUE"
+      },
+      {
+        "id": 2,
+        "title": "FALSE"
+      },
+      {
+        "id": 3,
+        "title": "Not sure"
+      },
+      {
+        "id": 4,
+        "title": "I'm tired. Can I take a break?"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Mount Vesuvius destroyed Pompei in 79 AD",
+    "type": "select",
+    "options": [
+      {
+        "id": 1,
+        "title": "TRUE"
+      },
+      {
+        "id": 2,
+        "title": "FALSE"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Mount Everest is ___________ in the world.",
+    "description": "(the most highest, the highest, highest, most highest)",
+    "type": "text",
+    "options": []
+  }
+]

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="numere" />
+    <button
+      type="buttone"
+      onCLick="adauga_numere(document.getElementById('numere'));"
+    >
+      Adauga
+    </button>
+    <button
+      type="buttone"
+      onClick="afiseaza_numere(document.getElementById('numere'));"
+    >
+      Afiseaza
+    </button>
+    <div id="numere_container"></div>
+
+    <strong id="text">Buna ziua, sunt Costel. Cu ce va pot ajuta?</strong>
+
+    <a
+      href="http://google.com"
+      onMouseOver="foo(document.getElementById('text'), 'mouseover')"
+      onMouseOut="foo(document.getElementById('text'), 'mouseout')"
+      >Schimba culoarea textului de mai sus</a
+    >
+
+    <script>
+      function f(a) {
+        var r = [];
+        for (var i = 0; i < a.length; i++) {
+          r[i] = a[i];
+        }
+
+        console.log(r);
+      }
+
+      var a = [0, 120, 3, 64, 23];
+
+      f(a);
+
+      var a = [0, 120, 3, 64, 23];
+      var aux = 0;
+
+      console.log("MAsiv:", a);
+
+      for (var i = 0; i < a.length; i++) {
+        for (var j = i; j < a.length; j++) {
+          if (a[i] > a[j]) {
+            aux = a[i];
+            a[i] = a[j];
+            a[j] = aux;
+          }
+        }
+      }
+
+      console.log("Sortat:", a);
+
+      var numere = [];
+
+      function adauga_numere(e) {
+        var t = e.value;
+
+        while (t != 0) {
+          numere.push(t % 10);
+          t = Math.floor(t / 10);
+        }
+
+        numere.reverse();
+        console.log(numere);
+      }
+
+      function afiseaza_numere(e) {
+        document.getElementById("numere_container").innerHTML = "";
+        numere.forEach(function (i, key) {
+          if (key >= e.value - 1 || e.value > numere.length) {
+            document.getElementById("numere_container").innerHTML += i;
+          }
+        });
+      }
+
+      function foo(e, t) {
+        switch (t) {
+          case "mouseover":
+            e.style.color = "green";
+            break;
+          case "mouseout":
+            e.style.color = "black";
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>

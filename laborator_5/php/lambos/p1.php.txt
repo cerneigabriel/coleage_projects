@@ -1,0 +1,63 @@
+<?php
+echo "Lambos Lucian<br>";
+echo "Laborator 5, varianta 1<br>";
+echo "1.<br>";
+$n = 2;
+$m = 2;
+$arr = [];
+for ($i = 0; $i < $n; $i++) {
+    $arr[$i] = [];
+    for ($j = 0; $j < $m; $j++) array_push($arr[$i], rand(-54, 35));
+}
+
+foreach ($arr as $key => $value) echo implode(" ", $value) . " ";
+echo "<br><br>";
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) if ($v % 2 == 0 && $v < 10) echo $v . " ";
+}
+echo "<br><br>";
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) if ((int) (log($v, 10) + 1) == 1) echo $v . " ";
+}
+echo "<br><br>";
+
+$max = 0;
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) if ($v > $max)  $max = $v;
+}
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) {
+        if ($v % 2 == 0) {
+            $v = $max * 2;
+        }
+        echo $v . " ";
+    }
+}
+echo "<br><br>";
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) {
+        if ($key == 0 || $k == 1) echo $v . " ";
+    }
+}
+echo "<br><br>";
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) {
+        if ($key == 1 || $k == 0) echo $v . " ";
+    }
+}
+echo "<br><br>";
+
+
+echo "4.<br>";
+foreach ($arr as $key => $value) echo implode(" ", $value) . " ";
+echo "<br><br>";
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) if ($key == $k) $v += 5;
+    echo implode(" ", $value) . " ";
+}

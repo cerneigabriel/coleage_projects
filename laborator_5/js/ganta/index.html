@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Laborator 4</title>
+  </head>
+  <body>
+    <h2>1)</h2>
+    <input type="text" name="n" id="n" />
+    <input type="text" name="m" id="m" />
+    <button
+      type="button"
+      onClick="p1(document.getElementById('n').value, document.getElementById('m').value)"
+    >
+      Afiseaza
+    </button>
+    <ol type="a" id="p1"></ol>
+
+    <h2>4)</h2>
+    <input type="text" name="n" id="n1" value="5" />
+    <input type="text" name="m" id="m1" value="5" />
+    <br />
+    <label for="col">Se mareste fiecare element cu 15 al coloanei:</label>
+    <input type="text" name="col" id="col" value="1" />
+    <button
+      type="button"
+      onClick="p4(document.getElementById('n1').value, document.getElementById('m1').value, document.getElementById('col').value)"
+    >
+      Afiseaza
+    </button>
+    <ol type="a" id="p4"></ol>
+
+    <script>
+      function Random(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+
+      function numere(n) {
+        var numere = [];
+        while (n != 0) {
+          numere.push(n % 10);
+          n = parseInt(n / 10);
+        }
+
+        return numere.reverse();
+      }
+
+      function afisareArray(array) {
+        let text = "";
+        array.forEach(function (v, k) {
+          text += `[${k}]: `;
+          if (typeof v === "object") {
+            v.forEach(function (_v) {
+              text += `${_v}, `;
+            });
+          } else text += `${v}, `;
+          text += "<br>";
+        });
+        return text;
+      }
+
+      function createNode(elem, html) {
+        node = document.createElement(elem);
+        node.innerHTML = html;
+        return node;
+      }
+
+      function p1(n, m) {
+        if (!((m = parseInt(m)) < 10 && (n = parseInt(n)) < 10)) return;
+
+        var ul = document.getElementById("p1");
+        var node;
+        var array = [];
+        ul.innerHTML = "";
+
+        for (let i = 0; i < n; i++) {
+          array[i] = [];
+          for (let j = 0; j < m; j++) array[i].push(Random(-10, 25));
+        }
+
+        node = createNode("LI", afisareArray(array));
+        ul.appendChild(node);
+
+        var b = array
+          .map(function (v) {
+            return v.filter(function (_v) {
+              return _v % 2 === 0 && _v < 10;
+            });
+          })
+          .flat().length;
+
+        node = createNode("LI", b);
+        ul.appendChild(node);
+
+        var c = array
+          .map(function (v) {
+            return v.filter(function (_v) {
+              return numere(_v).length === 1;
+            });
+          })
+          .flat().length;
+
+        node = createNode("LI", c);
+        ul.appendChild(node);
+
+        var max = array[0][0];
+        array.forEach(function (v) {
+          v.forEach(function (_v) {
+            if (_v > max) max = _v;
+          });
+        });
+
+        var d = array.map(function (v) {
+          return v.map(function (_v) {
+            return _v % 2 === 0 ? max * 2 : _v;
+          });
+        });
+
+        node = createNode("LI", afisareArray(d));
+        ul.appendChild(node);
+
+        var e = [];
+        var f = [];
+        array.forEach(function (v, k) {
+          if (k === 0) e.push(v);
+          else e.push(v[1]);
+          if (k === 1) f.push(v);
+          else f.push(v[0]);
+        });
+
+        node = createNode("LI", afisareArray(e));
+        ul.appendChild(node);
+        node = createNode("LI", afisareArray(f));
+        ul.appendChild(node);
+      }
+
+      function p4(n, m, col) {
+        var ul = document.getElementById("p4");
+        var node;
+        var array = [];
+        ul.innerHTML = "";
+
+        for (let i = 0; i < n; i++) {
+          array[i] = [];
+          for (let j = 0; j < m; j++) array[i].push(Random(-10, 25));
+        }
+
+        node = createNode("LI", afisareArray(array));
+        ul.appendChild(node);
+
+        var a = [...array];
+        a.forEach(function (v, k) {
+          v[k] = v[k] + 5;
+        });
+
+        node = createNode("LI", afisareArray(a));
+        ul.appendChild(node);
+
+        var max = array[0][0];
+        array.forEach(function (v) {
+          v.forEach(function (_v) {
+            if (_v > max) max = _v;
+          });
+        });
+
+        var b = [];
+        array.forEach(function (v) {
+          if (v.indexOf(max) >= 0) b.push(v);
+        });
+
+        node = createNode("LI", afisareArray(b));
+        ul.appendChild(node);
+
+        array.forEach(function (v, k) {
+          v[col - 1] += 15;
+        });
+
+        node = createNode("LI", afisareArray(array));
+        ul.appendChild(node);
+      }
+    </script>
+  </body>
+</html>
