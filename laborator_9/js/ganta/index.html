@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costel Ganta - Laborator</title>
+</head>
+
+<body>
+    <h1>Exercitiul 1</h1>
+    <select onchange="document.body.style.background = this.value;">
+        <option>-</option>
+        <option value="white">White</option>
+        <option value="green">Green</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+    </select>
+
+    <select onchange="popupCenter(this.value, 'Car', 600, 600);">
+        <option>-</option>
+        <option value="https://renault.md/oferte_speciale/oferte_speciale_captur_13880.html">Renault Captur</option>
+        <option value="https://www.lamborghini.com/en-en/models/aventador/aventador-s">Lamborghini Aventador S</option>
+        <option value="https://www.vw.com/models/jetta/section/overview/">Volkswagen Jetta</option>
+        <option value="https://www.ford.com/cars/mustang/">Ford Mustang</option>
+    </select>
+
+    <script>
+        function popupCenter(url, title, w, h) {
+            var left = (screen.width / 2) - (w / 2);
+            var top = (screen.height / 2) - (h / 2);
+            return window.open(url, title, `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${top}, left=${left}`);
+        }
+    </script>
+
+    <h1>Exercitiul 2</h1>
+    <form action="" method="get">
+        <input type="text" name="username" onchange="ex2ChangeUserData(this.parentNode)">
+        <input type="text" name="product1_name" value="Cafea" onchange="ex2ChangeUserData(this.parentNode)">
+        <input type="text" name="product1_price" value="20" onchange="ex2ChangeUserData(this.parentNode)">
+        <input type="text" name="product1_quantity" value="5" onchange="ex2ChangeUserData(this.parentNode)">
+        <input type="text" name="product2_name" value="Cafea" onchange="ex2ChangeUserData(this.parentNode)">
+        <input type="text" name="product2_price" value="20" onchange="ex2ChangeUserData(this.parentNode)">
+        <input type="text" name="product2_quantity" value="5" onchange="ex2ChangeUserData(this.parentNode)">
+    </form>
+
+    <div class="card" id="usercard">
+        <h4>Client: <u id="username"></u></h4>
+        <h5>Produse achizitionale</h5>
+        <table border="1" style="border-spacing: 0;">
+            <thead>
+                <tr>
+                    <th>Produs</th>
+                    <th>Pret</th>
+                    <th>Cantitate</th>
+                    <th>Valoare</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="product1_name"></td>
+                    <td id="product1_price"></td>
+                    <td id="product1_quantity"></td>
+                    <td id="product1_total_price"></td>
+                </tr>
+                <tr>
+                    <td id="product2_name"></td>
+                    <td id="product2_price"></td>
+                    <td id="product2_quantity"></td>
+                    <td id="product2_total_price"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4><strong>Suma totala achitata:</strong><u id="total_price"></u></h4>
+    </div>
+
+    <script>
+        function ex2ChangeUserData(form, event) {
+            // Inputs
+            var username = form.querySelector('input[name="username"]').value,
+                product1_name = form.querySelector('input[name="product1_name"]').value,
+                product1_price = parseInt(form.querySelector('input[name="product1_price"]').value),
+                product1_quantity = parseInt(form.querySelector('input[name="product1_quantity"]').value),
+                product2_name = form.querySelector('input[name="product2_name"]').value,
+                product2_price = parseInt(form.querySelector('input[name="product2_price"]').value),
+                product2_quantity = parseInt(form.querySelector('input[name="product2_quantity"]').value);
+
+            var table = document.getElementById('usercard');
+            // Change data
+            table.querySelector('#username').innerText = username;
+            table.querySelector('#product1_name').innerText = product1_name;
+            table.querySelector('#product1_price').innerText = product1_price;
+            table.querySelector('#product1_quantity').innerText = product1_quantity;
+            table.querySelector('#product1_total_price').innerText = product1_price * product1_quantity;
+            table.querySelector('#product2_name').innerText = product2_name;
+            table.querySelector('#product2_price').innerText = product2_price;
+            table.querySelector('#product2_quantity').innerText = product2_quantity;
+            table.querySelector('#product2_total_price').innerText = product2_price * product2_quantity;
+            table.querySelector('#total_price').innerText = product1_price * product1_quantity + product2_price * product2_quantity;
+        }
+    </script>
+
+    <h1>Exercitiul 3</h1>
+    <form action="" method="get" onSubmit="validateInputs(this, event)">
+        <label for="">Nume: </label>
+        <input type="text" name="name">
+        <small class="name_error" style="color: red; display: block;"></small>
+        <label for="">Parola: </label>
+        <input type="password" name="password">
+        <small class="password_error" style="color: red; display: block;"></small>
+        <br>
+        <input type="checkbox" name="hardware1[]" value="Calculator">
+        <label for="">Calculator</label>
+        <br>
+        <input type="checkbox" name="hardware1[]" value="Imprimanta">
+        <label for="">Imprimanta</label>
+        <br>
+        <input type="radio" name="hardware2" value="CD-Rom">
+        <label for="">CD-Rom</label>
+        <br>
+        <input type="radio" name="hardware2" value="DVD-Rom">
+        <label for="">DVD-Rom</label>
+        <br>
+        <label for="">Multimedia: </label>
+        <select name="multimedia" id="" multiple>
+            <option value="Boxe">Boxe</option>
+            <option value="Casti">Casti</option>
+            <option value="Microfon">Microfon</option>
+            <option value="" selected></option>
+        </select>
+        <br>
+        <label for="">Alte optiuni: </label>
+        <textarea name="other_options" id="" cols="10" rows="5"></textarea>
+        <br>
+        <button type="submit">Afiseaza optiunile</button>
+        <br>
+        <label for="">Ati ales: </label><br>
+        <textarea name="choosed_options" id="" cols="30" rows="10"></textarea>
+    </form>
+
+    <script>
+        function validateInputs(form, event) {
+            event.preventDefault();
+
+            var name = form.elements.namedItem("name");
+            var name_error = form.querySelector(".name_error");
+
+            var password = form.elements.namedItem("password");
+            var password_error = form.querySelector(".password_error");
+
+            var hardware1 = [...form.elements.namedItem("hardware1[]")].filter(item => (item.checked));
+            var hardware2 = [...form.elements.namedItem("hardware2")].filter(item => (item.checked));
+
+            var multimedia = [...form.elements.namedItem("multimedia").options].filter(item => (item.selected));
+
+            var other_options = form.elements.namedItem("other_options");
+            var choosed_options = form.elements.namedItem("choosed_options");
+
+            name_error.innerHTML = '';
+            if (name.value == "") name_error.innerText = "Introduceti numele dvs.";
+
+            password_error.innerHTML = '';
+            if (password.value == "") password_error.innerText = "Introduceti parola dorita";
+
+            choosed_options.innerHTML = '';
+            choosed_options.innerHTML += `Nume: ${name.value}\n`;
+            choosed_options.innerHTML += `Parola: ${password.value}\n`;
+            if (hardware1.length > 0 || hardware2.length > 0) choosed_options.innerHTML += 'Hardware:\n';
+            [...hardware1].forEach(item => (choosed_options.innerHTML += `- ${item.value}\n`));
+            [...hardware2].forEach(item => (choosed_options.innerHTML += `- ${item.value}\n`));
+
+            if (multimedia.length > 0) choosed_options.innerHTML += 'Multimedia:\n';
+            [...multimedia].forEach(item => (choosed_options.innerHTML += `- ${item.value}\n`));
+
+            if (other_options.value != "") choosed_options.innerHTML += `Alte Optiuni:\n ${other_options.value}`;
+        }
+    </script>
+
+    <h1>Exercitiul 4</h1>
+    <form action="" method="get">
+        <h4>TOTAL: <input disabled name="total_price" value="0"></h4>
+        <input type="checkbox" name="bucket[]" value="50" onChange="updateBucket(this.parentNode)">
+        <label for="">Carte 1 - 50 lei</label>
+        <input type="checkbox" name="bucket[]" value="60" onChange="updateBucket(this.parentNode)">
+        <label for="">Carte 2 - 60 lei</label>
+        <input type="checkbox" name="bucket[]" value="30.50" onChange="updateBucket(this.parentNode)">
+        <label for="">Carte 3 - 30.50 lei</label>
+    </form>
+
+    <script>
+        function updateBucket(form) {
+            var bucketList = [...form.elements.namedItem("bucket[]")].filter(item => (item.checked));
+            var total_price = form.elements.namedItem("total_price");
+            total_price.value = 0;
+
+            bucketList.forEach(item => (total_price.value = (parseFloat(item.value) + parseFloat(total_price.value)).toFixed(2)));
+        }
+    </script>
+
+    <h1>Exercitiul 5</h1>
+    <style>
+        #event {
+            width: 80%;
+            height: 500px;
+            background-color: rgb(255, 192, 192);
+            outline-style: dashed;
+            outline-width: 2px;
+            outline-color: black;
+        }
+    </style>
+    <div id="event"></div>
+
+    <script>
+        var events = ["click", "dblclick", "mousedown", "mousemove", "mouseout", "mouseover", "mouseup", "keydown", "keypress", "keyup"];
+
+        events.forEach(item => {
+            document.getElementById("event").addEventListener(item, function (event) {
+                console.log(event.type);
+            });
+        });
+    </script>
+</body>
+
+</html>

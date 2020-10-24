@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costel Ganta</title>
+</head>
+<body>
+    <button type="button" id="button1">Deschide</button>
+    <button type="button">D.Principala</button>
+    <button type="button">D.Secundara</button>
+    <button type="button">Sus</button>
+    <button type="button">Jos</button>
+
+    <script>
+        document.getElementById("button1").onclick = () => {
+            popupCenter({url: 'https://www.google.com', title: 'Google', w: 100, h: 100});  
+        }
+
+        const popupCenter = ({url, title, w, h}) => {
+            // Fixes dual-screen position                             Most browsers      Firefox
+            const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
+            const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+
+            const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            const systemZoom = width / window.screen.availWidth;
+            const left = (width - w) / 2 / systemZoom + dualScreenLeft
+            const top = (height - h) / 2 / systemZoom + dualScreenTop
+            const newWindow = window.open(url, title, 
+                `
+                scrollbars=yes,
+                width=${w / systemZoom}, 
+                height=${h / systemZoom}, 
+                top=${top}, 
+                left=${left}
+                `
+            )
+
+            if (window.focus) newWindow.focus();
+        }
+
+    </script>
+</body>
+</html>

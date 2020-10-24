@@ -84,29 +84,9 @@ function nrCharInString(string $str, string $letter)
           .json()
           .then(res => {
             console.log(res);
-            document.getElementById(`${function_name}_container`).innerHTML = ''
-            for (const [key, value] of Object.entries(res)) {
-              let html = `<strong>${value.title}: </strong>`;
-              switch (typeof value.value) {
-                case 'number':
-                  html += value.value;
-                  break;
-                case 'string':
-                  html += value.value;
-                  break;
-
-                case 'object':
-                  html += '<br/>';
-                  for (const [_key, _value] of Object.entries(value.value)) {
-                    html += `${_value}, `;
-                  }
-
-                  default:
-                    break;
-              }
-              html += '<br/>';
-              document.getElementById(`${function_name}_container`).innerHTML += html;
-            }
+            
+            // for (const [key, value] of Object.entries(res)) {
+            // }
 
           }).catch(err => {
             console.log(err);

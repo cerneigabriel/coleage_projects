@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Costel Ganta - Laborator</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="#first">Ex.1</a>
+      <a href="#second">Ex.2</a>
+      <a href="#third">Ex.3</a>
+    </nav>
+
+    <div class="container">
+      <section id="first">
+        <div class="section__wrapper">
+          <h2>Ecxercitiul 1</h2>
+          <ol id="list_1">
+            <li>Item1</li>
+            <li>Item2</li>
+            <li>Item3</li>
+            <li>Item4</li>
+            <li>Item5</li>
+          </ol>
+
+          <div class="space"></div>
+
+          <h4>Adauga Item</h4>
+          <form onSubmit="itemToList(this, event)">
+            <div class="group">
+              <label>Itemul</label>
+              <input type="text" name="item" />
+            </div>
+            <div class="group">
+              <label>Lista</label>
+              <input type="text" name="list" />
+            </div>
+            <div class="group">
+              <input type="submit" value="Adauga" />
+            </div>
+          </form>
+
+          <div class="space"></div>
+
+          <h4>Inlocuieste Item</h4>
+          <form onSubmit="replaceItem(this, event)">
+            <div class="group">
+              <label>Itemul Nou</label>
+              <input type="text" name="new_item" />
+            </div>
+            <div class="group">
+              <label>Itemul pentru inlocuit</label>
+              <input type="text" name="old_item" />
+            </div>
+            <div class="group">
+              <input type="submit" value="Inlocuieste" />
+            </div>
+          </form>
+
+          <div class="space"></div>
+
+          <h4>Sterge Item</h4>
+          <form onSubmit="removeItem(this, event)">
+            <div class="group">
+              <label>Sterge dupa numar de ordine</label>
+              <input type="text" name="key" />
+            </div>
+
+            <div class="group">
+              <label>Sterge dupa item</label>
+              <input type="text" name="item" />
+            </div>
+
+            <div class="group">
+              <input type="submit" value="Sterge" />
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="second">
+        <h2>Ecxercitiul 2</h2>
+
+        <form onSubmit="ex2Form(this, event)">
+          <div class="group">
+            <label>Selecteaza optiunea dorita</label>
+            <select name="my_select" onChange="ex2Select(this)">
+              <option value="paragraph">Paragraf</option>
+              <option value="img">Img</option>
+              <option value="list">Lista Neordonata cu 5 itemi</option>
+            </select>
+          </div>
+
+          <div class="input_groups" id="paragraph">
+            <div class="group">
+              <label>Textul:</label>
+              <input type="text" name="paragraph_text" />
+            </div>
+            <div class="group">
+              <label>Culoarea fontului:</label>
+              <input type="text" name="paragraph_color" />
+            </div>
+            <div class="group">
+              <label>Marimea fontului:</label>
+              <input type="text" name="paragraph_size" />
+            </div>
+          </div>
+
+          <div class="input_groups" id="img" style="display: none">
+            <div class="group">
+              <label>Sursa imaginii:</label>
+              <input type="text" name="img_src" />
+            </div>
+            <div class="group">
+              <label>Latimea imaginii:</label>
+              <input type="text" name="img_width" />
+            </div>
+            <div class="group">
+              <label>Inatimea imaginii:</label>
+              <input type="text" name="img_height" />
+            </div>
+          </div>
+
+          <div class="input_groups" id="list" style="display: none">
+            <ol>
+              <li>
+                <div class="group">
+                  <input type="text" name="list_item1" />
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <input type="text" name="list_item2" />
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <input type="text" name="list_item3" />
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <input type="text" name="list_item4" />
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <input type="text" name="list_item5" />
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="group">
+            <input type="submit" value="Trimite" />
+          </div>
+        </form>
+      </section>
+
+      <section id="third">
+        <h2>Exercitiul 3</h2>
+        <h4 id="style">Formateaza textul acesta</h4>
+
+        <form onSubmit="ex3Form(this, event)">
+          <div class="group">
+            <label for="styles">Stiluri</label>
+            <textarea name="styles" id="styles" cols="30" rows="10"></textarea>
+          </div>
+
+          <div class="group">
+            <input type="submit" value="Fromateaza" />
+          </div>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
