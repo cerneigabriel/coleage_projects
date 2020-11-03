@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <form id="nume_form">
+        <p>Salveaza datele in cookie, localStorage si sessionStorage</p>
+
+        <label for="nume">Nume</label><br>
+        <input type="text" id="nume" name="nume"><br>
+
+        <label for="prenume">Prenume</label><br>
+        <input type="text" id="prenume" name="prenume"><br>
+
+        <button type="submit">Salveaza</button>
+    </form>
+
+    <br><br><br>
+
+    <form id="zodia_form">
+        <p>Determina-ti zodia</p>
+
+        <label for="ziua">Ziua</label><br>
+        <input type="text" id="ziua" name="ziua"><br>
+
+        <label for="luna">Luna</label><br>
+        <input type="text" id="luna" name="luna"><br>
+
+        <button type="submit">Determina</button><br>
+
+        <div id="zodia_afisare"></div>
+    </form>
+
+    <script>
+        function Cookie() {
+            this._c = document.cookie;
+
+            this.set = ({ cname, cvalue, exdays }) => {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+
+                this._c = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+                this.sync();
+                return { cname, cvalue, exdays }
+            }
+
+            this.get = cname => {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(this._c);
+                var ca = decodedCookie.split(';');
+
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+
+            this.remove = cname => {
+                this._c = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                this.sync();
+            }
+
+            this.sync = () => {
+                document.cookie = this._c;
+            }
+        }
+
+        function LocalStorage() {
+            this._s = localStorage;
+
+            this.set = ({ cname, cvalue }) => this._s.setItem(cname, cvalue);
+            this.get = cname => this._s.getItem(cname) === null ? "" : this._s.getItem(cname);
+            this.remove = cname => this._s.removeItem(cname);
+        }
+
+        function SessionStorage() {
+            this._s = sessionStorage;
+
+            this.set = ({ cname, cvalue }) => this._s.setItem(cname, cvalue);
+            this.get = (cname) => this._s.getItem(cname) === null ? "" : this._s.getItem(cname);
+            this.remove = (cname) => this._s.removeItem(cname);
+            this.clear = () => this._s.clear();
+        }
+
+        var nume_form = document.getElementById("nume_form"),
+            zodia_form = document.getElementById("zodia_form"),
+            zodia_afisare = document.getElementById("zodia_afisare"),
+            _cookie = new Cookie,
+            _localStorage = new LocalStorage,
+            _sessionStorage = new SessionStorage;
+
+        nume_form.onsubmit = event => {
+            event.preventDefault();
+
+            let nume = nume_form.elements.namedItem("nume").value.trim(),
+                prenume = nume_form.elements.namedItem("prenume").value.trim();
+
+            if (nume == "" || prenume == "") {
+                alert("Introduceti toate datele necesare");
+                return false;
+            }
+
+            let data = {
+                cname: "username",
+                cvalue: `${nume} ${prenume}`,
+                exdays: 1
+            };
+
+            _cookie.set(data);
+            _localStorage.set(data);
+            _sessionStorage.set(data);
+
+            return true;
+        }
+
+        zodia_form.onsubmit = event => {
+            event.preventDefault();
+
+            let ziua = zodia_form.elements.namedItem("ziua").value.trim(),
+                luna = zodia_form.elements.namedItem("luna").value.trim();
+
+            if (ziua == "" || luna == "") {
+                alert("Introduceti toate datele necesare");
+                return false;
+            }
+
+            var zodiac_dates = {
+                "12/22 - 01/19": "Capricorn",
+                "01/20 - 02/18": "Varsator",
+                "02/19 - 03/20": "Peste",
+                "03/21 - 04/20": "Berbec",
+                "04/21 - 05/21": "Taur",
+                "05/22 - 06/21": "Gemeni",
+                "06/22 - 07/21": "Rac",
+                "07/22 - 08/22": "Fecioara",
+                "09/23 - 10/22": "Balanta",
+                "10/23 - 11/21": "Scorpion",
+                "11/22 - 12/21": "Sagetator",
+            };
+
+            function getZodiac() {
+                for (var key in zodiac_dates) {
+                    const zodiac = zodiac_dates[key];
+                    let [begin, end] = key.split(" - ");
+                    let [begin_date, end_date] = [new Date(begin), new Date(end)];
+
+                    let now = new Date;
+                    let user_zodiac = `${luna}/${ziua}/${now.getFullYear()}`;
+
+                    begin = `${begin}/${(begin_date.getMonth() > end_date.getMonth() ? now.getFullYear() - 1 : now.getFullYear())}`;
+                    end = `${end}/${now.getFullYear()}`;
+
+                    if (begin <= user_zodiac && user_zodiac <= end) return zodiac;
+                }
+
+                return false;
+            }
+
+            zodia_afisare.innerText = getZodiac();
+
+            return true;
+        }
+
+        var _c_username = _cookie.get("username"),
+            _ls_username = _localStorage.get("username"),
+            _ss_username = _sessionStorage.get("username");
+
+        window.onload = () => alert(`
+            Cookie: Bine ati venit, ${_c_username}!
+            LocalStorage: Bine ati venit, ${_ls_username}!
+            SessionStorage: Bine ati venit, ${_ss_username}!
+        `);
+
+        window.onbeforeunload = () => alert(`
+            Cookie: La revedere, ${_c_username}!
+            LocalStorage: La revedere, ${_ls_username}!
+            SessionStorage: La revedere, ${_ss_username}!
+        `);
+    </script>
+</body>
+
+</html>

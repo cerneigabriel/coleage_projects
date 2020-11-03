@@ -1,0 +1,11 @@
+@import "";
+
+.dropwdown_filter::after {
+    content: '\f0b0' !important;
+    font-family: 'Font Awesome 5 Free';
+    font-size: .8rem;
+    font-weight: 600;
+    border: 0;
+    padding: 0;
+    vertical-align: middle !important;
+}
