@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costel Ganta</title>
+</head>
+
+<body>
+    <form id="user_form" action="" method="post">
+
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name"><br>
+        <small id="name_errors" class="errors" style="color: red"></small><br>
+
+        <label for="surname">Surname</label><br>
+        <input type="text" id="surname" name="surname"><br>
+        <small id="surname_errors" class="errors" style="color: red"></small><br>
+
+        <label for="city">City</label><br>
+        <input type="text" id="city" name="city"><br>
+        <small id="city_errors" class="errors" style="color: red"></small><br>
+
+        <label for="email">Email</label><br>
+        <input type="text" id="email" name="email"><br>
+        <small id="email_errors" class="errors" style="color: red"></small><br>
+
+        <label for="phone">Phone</label><br>
+        <input type="text" id="phone" name="phone"><br>
+        <small id="phone_errors" class="errors" style="color: red"></small><br>
+
+        <label for="gender">Gender</label><br>
+        <input type="text" id="gender" name="gender"><br>
+        <small id="gender_errors" class="errors" style="color: red"></small><br>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        const phoneReg = /^((\+1)?[\s-]?)?\(?[2-9]\d\d\)?[\s-]?[2-9]\d\d[\s-]?\d\d\d\d/g;
+        const emailReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        var form = document.getElementById("user_form");
+
+        function is_empty(data) {
+            return data === undefined || data === null || data === "";
+        }
+
+        function validateUser(data, rules) {
+            var errors = [];
+
+            for (const prop in rules) {
+                var sub_rules = rules[prop];
+                errors[prop] = [];
+
+                sub_rules.forEach(rule => {
+
+                    if (rule === "required" && is_empty(data[prop].value)) errors[prop].push(`${prop} is missing`);
+
+                    if (rule === "string" && !is_empty(data[prop].value) && typeof data[prop].value !== "string") errors[prop].push(`${prop} is not a valid string`);
+
+                    if (rule === "phone" && !is_empty(data[prop].value) && !phoneReg.test(data[prop].value)) errors[prop].push(`${prop} is not a valid phone number`);
+
+                    if (rule === "email" && !is_empty(data[prop].value) && !emailReg.test(data[prop].value)) errors[prop].push(`${prop} is not a valid email`);
+                });
+            }
+
+            return errors;
+        }
+
+        form.onsubmit = event => {
+            event.preventDefault();
+
+            var errors = validateUser(form.elements, {
+                name: ["required", "string"],
+                surname: ["required", "string"],
+                city: ["required", "string"],
+                phone: ["phone"],
+                email: ["email"],
+            });
+
+            console.log(errors);
+
+
+            [...document.querySelectorAll(".errors")].forEach(item => (item.innerHTML = ""));
+            if (Object.keys(errors).length > 0) {
+                for (const name in errors) {
+                    var input_errors = errors[name];
+                    console.log(`${name}_errors`);
+                    input_errors.forEach(error => {
+                        document.getElementById(`${name}_errors`).innerHTML += `${error}<br>`;
+                    });
+                };
+            }
+        }
+    </script>
+</body>
+
+</html>

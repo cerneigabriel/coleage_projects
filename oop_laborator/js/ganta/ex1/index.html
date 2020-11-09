@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costel Ganta</title>
+</head>
+
+<body>
+
+    <script src="list.js"></script>
+    <script src="user.js"></script>
+    <script>
+        var list = new List();
+        list.add(new User("Costel", "Ganta", "2000-04-06"));
+        list.add(new User("Costel", "Ganta", "2003-04-06"));
+        list.add(new User("Cernei", "Gabriel", "2001-11-13"));
+
+        var min_age = list.all().sort((a, b) => (b.age - a.age))[0];
+        var max_age = list.all().sort((a, b) => (a.age - b.age))[0];
+        var avg_age = list.getAverage("age");
+        var birthMonth = list.getByBirthMonth(4);
+
+        console.log("Min age:", min_age);
+        console.log("Max age:", max_age);
+        console.log("Avg age:", avg_age);
+        console.log("Born in April:", birthMonth);
+    </script>
+</body>
+
+</html>

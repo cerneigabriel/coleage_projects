@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costel Ganta</title>
+</head>
+
+<body>
+
+    <script src="natural_number.js"></script>
+    <script src="natural_number_pairs.js"></script>
+    <script>
+        var num = new NaturalNumber(523);
+        console.log("Digit [2]: ", num.getDigitByIndex(2));
+        console.log("Number of digits: ", num.getDigitsCount());
+        console.log("Is Even number: ", num.isEven());
+        console.log("Find digit (2): ", num.findDigit(2));
+
+        num = new NaturalNumberPairs(523);
+        console.log("Numere comune(523, 5438)", num.numbersIntersection(5438));
+    </script>
+</body>
+
+</html>
